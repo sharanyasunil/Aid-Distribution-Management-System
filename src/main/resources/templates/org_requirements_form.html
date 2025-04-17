@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Requirements</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 350px;
+        }
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+            background: #ff7eb3;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #ff4d88;
+        }
+    </style>
+    <script>
+        function showSubOptions() {
+            const itemType = document.getElementById("itemType").value;
+            document.getElementById("clothesOptions").style.display = "none";
+            document.getElementById("booksOptions").style.display = "none";
+            document.getElementById("foodOptions").style.display = "none";
+            
+            if (itemType === "clothes") {
+                document.getElementById("clothesOptions").style.display = "block";
+            } else if (itemType === "books") {
+                document.getElementById("booksOptions").style.display = "block";
+            } else if (itemType === "food") {
+                document.getElementById("foodOptions").style.display = "block";
+            }
+        }
+        function setSubTypeBeforeSubmit() {
+            const itemType = document.getElementById("itemType").value;
+            let subType = "";
+            
+            if (itemType === "clothes") {
+                subType = document.getElementById("clothesSubType").value;
+            } else if (itemType === "books") {
+                subType = document.getElementById("booksSubType").value;
+            } else if (itemType === "food") {
+                subType = document.getElementById("foodSubType").value;
+            }
+            
+            document.getElementById("subTypeHidden").value = subType;
+        }
+    </script>
+</head>
+<body>
+    <h2>Enter Donation Requirements</h2>
+    <div class="container">
+        <form action="/org/submit-requirements" method="post" onsubmit="setSubTypeBeforeSubmit()">
+            <label>Type of donation item:</label>
+            <select id="itemType" name="itemType" onchange="showSubOptions()" required>
+                <option value="" disabled selected>Select</option>
+                <option value="clothes">Clothes</option>
+                <option value="books">Books</option>
+                <option value="food">Food</option>
+            </select>
+            
+            <div id="clothesOptions" style="display:none;">
+                <label>Clothing item:</label>
+                <select id="clothesSubType">
+                    <option value="t-shirt">T-shirt</option>
+                    <option value="pant">Pant</option>
+                    <option value="shorts">Shorts</option>
+                    <option value="jacket">Jacket</option>
+                </select>
+            </div>
+            
+            <div id="booksOptions" style="display:none;">
+                <label>Book type:</label>
+                <select id="booksSubType">
+                    <option value="textbook">Textbook</option>
+                    <option value="notebook">Notebook</option>
+                </select>
+            </div>
+            
+            <div id="foodOptions" style="display:none;">
+                <label>Food type:</label>
+                <select id="foodSubType">
+                    <option value="veg">Veg</option>
+                    <option value="non-veg">Non-Veg</option>
+                </select>
+            </div>
+            
+            <label>Quantity:</label>
+            <input type="number" name="quantity" min="1" required>
+            
+            <input type="hidden" name="subType" id="subTypeHidden" />
+            
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

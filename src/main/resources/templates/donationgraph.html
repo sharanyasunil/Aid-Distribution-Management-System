@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Bar Chart</title>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(loadData);
+
+        function loadData() {
+            fetch('/org/get-donation-data')
+                .then(response => response.json())
+                .then(data => drawChart(data))
+                .catch(error => console.error('Error loading donation data:', error));
+        }
+
+        function drawChart(donationData) {
+            var data = google.visualization.arrayToDataTable(donationData);
+
+            var options = {
+                title: 'Donations by Item Type and Sub-Type',
+                hAxis: { title: 'Item Type' },
+                vAxis: { title: 'Quantity' },
+                bars: 'group',
+                backgroundColor: '#f4f4f4',
+                isStacked: false // This makes it a grouped chart
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <h2>Donation Statistics</h2>
+    <div id="chart_div" style="width: 80%; height: 500px; margin: auto;"></div>
+</body>
+</html>

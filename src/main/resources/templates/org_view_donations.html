@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Received Donations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        .container {
+            margin: auto;
+            width: 80%;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.2);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        th {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+    <h2>Donations Received - <span th:text="${orgName}"></span></h2>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Donor</th>
+                <th>Item Type</th>
+                <th>Sub Type</th>
+                <th>Quantity</th>
+                <th>Time</th>
+            </tr>
+            <tr th:each="log : ${logs}">
+                <td th:text="${log.donor.name}"></td>
+                <td th:text="${log.itemType}"></td>
+                <td th:text="${log.subType}"></td>
+                <td th:text="${log.quantity}"></td>
+                <td th:text="${log.donatedAt} ?: 'N/A'"></td>
+
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

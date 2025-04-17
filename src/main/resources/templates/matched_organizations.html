@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matched Organizations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+        h2 {
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+        .org-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            width: 80%;
+            margin: 0 auto 20px auto;
+        }
+        .org-card p {
+            margin: 5px 0;
+        }
+        .btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background: #ffffff;
+            color: #2575fc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Matched Organizations</h2>
+
+    <div th:each="entry : ${matchedOrgs}">
+        <div class="org-card">
+            <p><strong>Organization:</strong> <span th:text="${entry.key.name}"></span></p>
+            <p><strong>Type:</strong> <span th:text="${entry.key.typeOfOrg}"></span></p>
+            <div th:each="req : ${entry.value}">
+                <p th:text="'Item: ' + ${req.itemType} + ' - ' + ${req.subType} + ' | Qty: ' + ${req.quantity}"></p>
+            </div>
+            <form action="/donor/confirm-donation" method="get">
+                <input type="hidden" name="orgId" th:value="${entry.key.id}" />
+                <button type="submit" class="btn">Donate to This Org</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

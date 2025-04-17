@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Points</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        .container {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: auto;
+            width: 80%;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.2);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        th {
+            background: rgba(255,255,255,0.3);
+        }
+        .btn {
+            margin: 12px 10px 0;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            background-color: #ffffff;
+            color: #0072ff;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Points Summary</h2>
+    <h3>Total Points: <span th:text="${totalPoints}"></span></h3>
+
+    <div class="container">
+        <h3>All Transactions</h3>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Points</th>
+                <th>Time</th>
+            </tr>
+            <tr th:each="txn : ${transactions}">
+                <td th:text="${txn.transactionType}">Transaction Type</td>
+                <td th:text="${txn.itemType != null ? txn.itemType + ' - ' + txn.subType : 'None'}">Item</td>
+                <td th:text="${txn.quantity}">Qty</td>
+                <td th:text="${txn.pointsAwarded}">Points</td>
+                <td th:text="${txn.transactionTime}"></td>
+            </tr>
+        </table>
+
+        <form action="/donor/points/donate" method="get" style="display:inline-block;">
+            <button type="submit" class="btn">Donate Points</button>
+        </form>
+        <form action="/donor/points/cashback" method="get" style="display:inline-block;">
+            <button type="submit" class="btn">Get Cashback</button>
+        </form>
+        <form action="/dashboard/donor" method="get" style="display:inline-block;">
+            <button type="submit" class="btn">Back to Dashboard</button>
+        </form>
+        
+    </div>
+</body>
+</html>

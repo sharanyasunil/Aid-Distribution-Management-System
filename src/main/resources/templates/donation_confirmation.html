@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Donation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        select, input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        .btn {
+            background: #ffffff;
+            color: #0072ff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Donate to <span th:text="${org.name}"></span></h2>
+    <div class="form-container">
+        <!-- Display error if present -->
+        <p th:if="${error}" th:text="${error}" style="color: #ffaaaa; font-weight: bold;"></p>
+
+        <form action="/donor/process-donation" method="post">
+            <input type="hidden" name="orgId" th:value="${org.id}" />
+
+            <label>Select Item Type:</label>
+            <select name="itemType" id="itemTypeDropdown" required>
+                <option value="" disabled selected>Select Type</option>
+                <option th:each="type : ${itemTypes}" th:value="${type}" th:text="${type}"></option>
+            </select>
+
+            <label>Select Sub Type:</label>
+            <select name="subType" id="subTypeDropdown" required>
+                <option value="" disabled selected>Select Sub Type</option>
+            </select>
+
+            <script th:inline="javascript">
+            /*<![CDATA[*/
+                const typeToSubTypes = /*[[${typeToSubTypes}]]*/ {};
+                const itemTypeDropdown = document.getElementById('itemTypeDropdown');
+                const subTypeDropdown = document.getElementById('subTypeDropdown');
+            
+                itemTypeDropdown.addEventListener('change', function () {
+                    const selectedType = this.value;
+                    const subTypes = typeToSubTypes[selectedType] || [];
+            
+                    // Clear and repopulate subtypes
+                    subTypeDropdown.innerHTML = '<option disabled selected>Select Sub Type</option>';
+                    subTypes.forEach(sub => {
+                        const opt = document.createElement('option');
+                        opt.value = sub;
+                        opt.textContent = sub;
+                        subTypeDropdown.appendChild(opt);
+                    });
+                });
+            /*]]>*/
+            </script>
+
+
+            <label>Quantity:</label>
+            <input type="number" name="quantity" min="1" required>
+
+            <button type="submit" class="btn">Donate!</button>
+        </form>
+    </div>
+</body>
+</html>

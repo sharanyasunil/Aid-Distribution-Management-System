@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('/images/dondash.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+        h2 {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            z-index: 1;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+            background: #00c6ff;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background: #0086cc;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome, Donor!</h2>
+    <div class="container">
+        <form action="/donor/donation-items" method="get">
+            <button type="submit" class="btn">List Donation Items</button>
+        </form>
+        <form action="/donor/view-donations" method="get">
+            <button type="submit" class="btn">View Your Donation Items</button>
+        </form>
+        <!-- ✅ New: View Matched Organizations Button -->
+        <form action="/donor/matched-orgs" method="get">
+            <button type="submit" class="btn">View Matched Organizations</button>
+        </form>
+        <form action="/donor/points" method="get">
+            <button type="submit" class="btn">View Points</button>
+        </form>
+        
+    </div>
+</body>
+</html>

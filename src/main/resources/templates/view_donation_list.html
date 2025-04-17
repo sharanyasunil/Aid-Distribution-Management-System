@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Your Donations</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 800px;
+        }
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #ffdd57;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        th {
+            background: rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+        }
+        .btn {
+            background-color: white;
+            color: #0072ff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Donation Items</h2>
+    <h3 th:text="${donorName}"></h3>
+
+    <div class="container">
+        <table>
+            <tr>
+                <th>Item Type</th>
+                <th>Sub Type</th>
+                <th>Quantity</th>
+            </tr>
+            <tr th:each="item : ${donations}">
+                <td th:text="${item.itemType}"></td>
+                <td th:text="${item.subType}"></td>
+                <td th:text="${item.quantity}"></td>
+            </tr>
+        </table>
+
+        <form action="/dashboard/donor" method="get">
+            <button type="submit" class="btn">Back to Dashboard</button>
+        </form>
+    </div>
+</body>
+</html>

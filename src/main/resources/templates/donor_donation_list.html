@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Donation Items</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 60%;
+            max-width: 600px;
+        }
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        th {
+            background: rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+        }
+        .add-more-btn {
+            background-color: #ffffff;
+            color: #0072ff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .add-more-btn:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Donation Items</h2>
+    <div class="container">
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Sub Type</th>
+                <th>Quantity</th>
+            </tr>
+            <tr th:each="item : ${donations}">
+                <td th:text="${item.itemType}"></td>
+                <td th:text="${item.subType}"></td>
+                <td th:text="${item.quantity}"></td>
+            </tr>
+        </table>
+
+        <!-- ✅ Add More Items Button -->
+        <form action="/donor/donation-items" method="get">
+            <button type="submit" class="add-more-btn">Add More Items</button>
+        </form>
+
+        <!-- ✅ View All Donations Button -->
+        <form action="/donor/view-donations" method="get" style="margin-top: 10px;">
+            <button type="submit" class="add-more-btn">View Donations</button>
+        </form>
+    </div>
+</body>
+</html>

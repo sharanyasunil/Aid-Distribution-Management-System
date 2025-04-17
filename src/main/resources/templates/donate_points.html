@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donate Points</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: auto;
+            width: 50%;
+        }
+        input[type="number"], .btn {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: none;
+            margin-top: 10px;
+            width: 80%;
+        }
+        .btn {
+            background: #fff;
+            color: #ff7e5f;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #eee;
+        }
+        .message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Donate Your Points</h2>
+    <div class="container">
+        <p>Total Available Points: <span th:text="${totalPoints}">0</span></p>
+
+        <form action="/donor/points/donate" method="post">
+            <input type="number" name="points" min="1" placeholder="Enter points to donate" required>
+            <br><button type="submit" class="btn">Donate Points</button>
+        </form>
+
+        <p class="message" th:if="${error}" th:text="${error}" style="color: #ffdddd;"></p>
+        <p class="message" th:if="${success}" th:text="${success}" style="color: #ccffcc;"></p>
+
+        <form action="/donor/points" method="get">
+            <button class="btn" style="margin-top:20px;">← Back to View Points</button>
+        </form>
+    </div>
+</body>
+</html>

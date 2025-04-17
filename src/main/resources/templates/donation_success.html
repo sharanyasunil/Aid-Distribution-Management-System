@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donation Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            text-align: center;
+            padding: 100px;
+        }
+        h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .btn {
+            margin-top: 30px;
+            padding: 12px 24px;
+            border: none;
+            background: #ffffff;
+            color: #0072ff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <h2 th:text="${message}"></h2>
+    <form action="/dashboard/donor" method="get">
+        <button type="submit" class="btn">Back to Dashboard</button>
+    </form>
+</body>
+</html>
