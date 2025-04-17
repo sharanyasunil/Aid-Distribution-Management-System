@@ -4,6 +4,14 @@ This project is a full-stack web application built using **Spring Boot** for the
 
 ---
 
+## Setup Instructions
+
+Before running the project, rename the root folder to demo.
+
+This is necessary because the Java package structure is com.example.demo and Spring Boot expects the root folder name to match the Maven artifact ID.
+
+---
+
 ## Key Features
 
 ### For Donors:
@@ -23,6 +31,23 @@ This project is a full-stack web application built using **Spring Boot** for the
 
 ---
 
-Before running the project, rename the root folder to demo.
+##  Design Principles & Patterns Followed
 
-This is necessary because the Java package structure is com.example.demo and Spring Boot expects the root folder name to match the Maven artifact ID.
+###  Architecture Pattern:
+**Model-View-Controller (MVC)**  
+- Controller: Handles user requests and session logic  
+- View: HTML + Thymeleaf templates  
+- Model: Java Entity Classes mapped to DB tables  
+
+###  Design Principles:
+- **SRP (Single Responsibility Principle)**: Every controller and class has one job.
+- **OCP (Open/Closed Principle)**: New features like points and graphs were added without modifying existing logic.
+- **GRASP - Controller**: Each controller acts as the system entry point for user actions.
+- **GRASP - Low Coupling**: Controllers use repositories and services with minimal dependencies.
+
+###  Design Patterns:
+- **Flyweight Pattern**: Shared `DonationItemType` objects to avoid repeated memory use for common type-subtype pairs.
+- **Chain of Responsibility (CoR)**: Used in the donation flow for sequential validation (existence, quantity, subtype validity).
+
+---
+
